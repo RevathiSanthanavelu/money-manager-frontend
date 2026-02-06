@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Edit2, Trash2, AlertCircle } from 'lucide-react';
-import { updateTransaction, deleteTransaction } from '../utils/api';
+import { deleteTransaction } from '../utils/api';
 
 export default function TransactionHistory({ transactions, onDelete, onEdit }) {
-  const [editData, setEditData] = useState({});
 
   const canEdit = (transaction) => {
     const now = new Date();
@@ -76,9 +75,6 @@ export default function TransactionHistory({ transactions, onDelete, onEdit }) {
                     {canEdit(transaction) ? (
                       <>
                         <button
-                          onClick={() => {
-                            setEditData(transaction);
-                          }}
                           className="inline-block p-1 hover:bg-blue-100 rounded"
                           title="Edit"
                         >

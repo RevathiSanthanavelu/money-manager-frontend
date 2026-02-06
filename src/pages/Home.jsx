@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState , useEffect , useCallback } from 'react';
 import Navbar from '../components/Navbar';
 import Dashboard from '../components/Dashboard';
 import TransactionHistory from '../components/TransactionHistory';
@@ -25,11 +25,7 @@ export default function Home({ user, onLogout }) {
     endDate: '',
   });
 
-  useEffect(() => {
-    fetchData();
-  }, [period, filters]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const [transRes, dashRes] = await Promise.all([
         getTransactions(filters),
@@ -53,9 +49,8 @@ export default function Home({ user, onLogout }) {
         balance: 0,
         categoryBreakdown: {},
       });
-    } finally {
     }
-  };
+  },[filters , period]);
 
   const handleAddTransaction = async (transactionData) => {
   console.log("Submitting:", transactionData); // 👈 ADD THIS
