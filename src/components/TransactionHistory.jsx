@@ -3,7 +3,6 @@ import { Edit2, Trash2, AlertCircle } from 'lucide-react';
 import { updateTransaction, deleteTransaction } from '../utils/api';
 
 export default function TransactionHistory({ transactions, onDelete, onEdit }) {
-  const [editingId, setEditingId] = useState(null);
   const [editData, setEditData] = useState({});
 
   const canEdit = (transaction) => {
@@ -11,16 +10,6 @@ export default function TransactionHistory({ transactions, onDelete, onEdit }) {
     const createdAt = new Date(transaction.createdAt);
     const hoursPassed = (now - createdAt) / (1000 * 60 * 60);
     return hoursPassed < 12;
-  };
-
-  const handleEdit = async (transaction) => {
-    try {
-      await updateTransaction(transaction._id, editData);
-      setEditingId(null);
-      onEdit();
-    } catch (error) {
-      alert('Failed to update transaction');
-    }
   };
 
   const handleDelete = async (id) => {
@@ -88,7 +77,6 @@ export default function TransactionHistory({ transactions, onDelete, onEdit }) {
                       <>
                         <button
                           onClick={() => {
-                            setEditingId(transaction._id);
                             setEditData(transaction);
                           }}
                           className="inline-block p-1 hover:bg-blue-100 rounded"
