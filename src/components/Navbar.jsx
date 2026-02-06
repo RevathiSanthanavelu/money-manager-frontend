@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { LogOut } from 'lucide-react';
 
 export default function Navbar({ user, onLogout }) {

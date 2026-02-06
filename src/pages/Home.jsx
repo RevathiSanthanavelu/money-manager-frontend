@@ -14,7 +14,6 @@ export default function Home({ user, onLogout }) {
   const [transactions, setTransactions] = useState([]);
   const [dashboardData, setDashboardData] = useState(null);
   const [period, setPeriod] = useState('monthly');
-  const [loading, setLoading] = useState(false);
   
   // Filter states
   const [showFilters, setShowFilters] = useState(false);
@@ -31,7 +30,6 @@ export default function Home({ user, onLogout }) {
   }, [period, filters]);
 
   const fetchData = async () => {
-    setLoading(true);
     try {
       const [transRes, dashRes] = await Promise.all([
         getTransactions(filters),
@@ -56,7 +54,6 @@ export default function Home({ user, onLogout }) {
         categoryBreakdown: {},
       });
     } finally {
-      setLoading(false);
     }
   };
 
