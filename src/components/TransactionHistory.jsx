@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Edit2, Trash2, AlertCircle } from 'lucide-react';
 import { deleteTransaction } from '../utils/api';
 
